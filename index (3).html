@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aluga Fácil | Laboratório GTM</title>
+  <!-- GTM: cole aqui o primeiro trecho de instalação do seu contêiner. -->
+  <style>
+    :root{--primary:#db1b5e;--dark:#262333;--bg:#fff7fa;--line:#eadce3}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--dark);background:var(--bg)}header{background:white;border-bottom:1px solid var(--line);padding:18px max(5%,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center}.brand{font-size:23px;font-weight:800;color:var(--primary)}header a{color:var(--dark);text-decoration:none;font-weight:bold}.hero{padding:65px 5%;text-align:center;background:linear-gradient(125deg,#fff,#ffe4ef)}.hero h1{font-size:clamp(30px,5vw,49px);margin:0 0 15px}.hero p{font-size:18px;max-width:640px;margin:0 auto 25px;line-height:1.5}.btn{display:inline-block;background:var(--primary);color:#fff;border:0;border-radius:9px;padding:14px 22px;font-size:16px;font-weight:bold;text-decoration:none;cursor:pointer}.btn.secondary{background:#fff;color:var(--primary);border:2px solid var(--primary)}main{max-width:1100px;margin:auto;padding:35px 20px}h2{font-size:29px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}.visual{height:145px;background:linear-gradient(135deg,#f4b9d0,#e5d7ef);display:grid;place-items:center;font-size:52px}.card-body{padding:20px}.card h3{margin:0 0 10px}.card p{color:#605b68}.card .btn{width:100%;text-align:center}.contact{background:white;border:1px solid var(--line);border-radius:14px;padding:28px;margin-top:45px;max-width:650px}label{display:block;font-weight:bold;margin:15px 0 6px}input,select{width:100%;padding:12px;border:1px solid #cfc4cb;border-radius:7px;font-size:16px}.contact .btn{margin-top:20px}.message{margin-top:15px;color:#166534;font-weight:bold}footer{text-align:center;padding:35px;color:#777}.small{font-size:13px;color:#716b75} @media(max-width:700px){.cards{grid-template-columns:1fr}header{padding:16px 5%}}
+  </style>
+</head>
+<body>
+  <!-- GTM: cole aqui o segundo trecho (noscript) de instalação do seu contêiner. -->
+  <header><div class="brand">Aluga Fácil</div><a href="#contato" id="menu-contato">Fale conosco</a></header>
+  <section class="hero">
+    <h1>Encontre seu próximo lar</h1>
+    <p>Explore imóveis fictícios em Porto Alegre. Este é um site de estudos para aprender Google Tag Manager e Google Analytics 4.</p>
+    <a class="btn" id="cta-ver-imoveis" href="#imoveis">Ver imóveis disponíveis</a>
+  </section>
+  <main>
+    <section id="imoveis"><h2>Imóveis em destaque</h2><div class="cards">
+      <article class="card"><div class="visual" aria-hidden="true">🏠</div><div class="card-body"><h3>Apartamento no Bom Fim</h3><p>2 quartos · R$ 2.100/mês</p><button class="btn ver-imovel" data-imovel-id="101" data-bairro="Bom Fim" data-valor="2100">Tenho interesse</button></div></article>
+      <article class="card"><div class="visual" aria-hidden="true">🏢</div><div class="card-body"><h3>Studio na Cidade Baixa</h3><p>1 quarto · R$ 1.650/mês</p><button class="btn ver-imovel" data-imovel-id="102" data-bairro="Cidade Baixa" data-valor="1650">Tenho interesse</button></div></article>
+      <article class="card"><div class="visual" aria-hidden="true">🌳</div><div class="card-body"><h3>Apartamento no Menino Deus</h3><p>3 quartos · R$ 3.000/mês</p><button class="btn ver-imovel" data-imovel-id="103" data-bairro="Menino Deus" data-valor="3000">Tenho interesse</button></div></article>
+    </div></section>
+    <section class="contact" id="contato"><h2>Receba mais informações</h2><p>Preencha o formulário fictício para simular a geração de um lead.</p>
+      <form id="form-lead">
+        <label for="nome">Nome</label><input id="nome" name="nome" required placeholder="Nome de teste">
+        <label for="email">E-mail</label><input id="email" name="email" type="email" required placeholder="teste@exemplo.com">
+        <label for="interesse">Tipo de imóvel</label><select id="interesse" name="interesse"><option value="apartamento">Apartamento</option><option value="studio">Studio</option><option value="casa">Casa</option></select>
+        <button type="submit" class="btn" id="cta-enviar-formulario">Enviar interesse</button>
+      </form>
+      <div id="form-feedback" class="message" role="status" aria-live="polite"></div>
+      <p class="small">Laboratório: nenhum dado é enviado a uma imobiliária ou armazenado em servidor. Use apenas dados fictícios. Eventos de analytics poderão ser enviados após a configuração do GTM.</p>
+    </section>
+    <p style="margin-top:30px"><a class="btn secondary" id="cta-whatsapp" href="https://wa.me/?text=Ol%C3%A1%21%20Estou%20testando%20um%20bot%C3%A3o%20de%20WhatsApp." target="_blank" rel="noopener noreferrer">Simular contato pelo WhatsApp</a></p>
+  </main>
+  <footer>Aluga Fácil – Site fictício para treinamento de GTM e GA4</footer>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    document.querySelectorAll('.ver-imovel').forEach(function(button){
+      button.addEventListener('click',function(){
+        window.dataLayer.push({event:'imovel_interesse',imovel_id:button.dataset.imovelId,imovel_bairro:button.dataset.bairro,imovel_valor:Number(button.dataset.valor)});
+        document.getElementById('interesse').value=button.dataset.imovelId==='102'?'studio':'apartamento';
+        document.getElementById('contato').scrollIntoView({behavior:'smooth'});
+      });
+    });
+    document.getElementById('form-lead').addEventListener('submit',function(event){
+      event.preventDefault();
+      window.dataLayer.push({event:'lead_form_submit',form_id:'form-lead',tipo_imovel:document.getElementById('interesse').value});
+      document.getElementById('form-feedback').textContent='Sucesso! Envio fictício realizado. Agora confira o evento no GTM Preview.';
+      this.reset();
+    });
+  </script>
+</body>
+</html>
